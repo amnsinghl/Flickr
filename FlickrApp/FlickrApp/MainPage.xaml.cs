@@ -32,8 +32,8 @@ namespace FlickrApp
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            String uri = FlickrManager.IsLoggedIn() ? "/SearchPage.xaml" : "/LoginPage.xaml";
-            this.NavigationService.Navigate(new Uri(uri, UriKind.Relative));
+//            String uri = FlickrManager.IsLoggedIn() ? "/SearchPage.xaml" : "/LoginPage.xaml";
+            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
         }
     }
 }

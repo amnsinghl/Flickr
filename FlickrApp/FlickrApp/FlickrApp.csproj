@@ -115,6 +115,9 @@
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CommandSampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +147,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\CompanyLogo.png" />
+    <Content Include="Images\Flickr_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\gaussian-blur_00260621.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo-flickr.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FlickrNetWP7">
@@ -208,6 +218,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
