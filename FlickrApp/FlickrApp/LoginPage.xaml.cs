@@ -47,7 +47,6 @@ namespace FlickrApp
         private void LoginWebBrowser_Navigating(object sender, NavigatingEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("Url: " + e.Uri.AbsoluteUri);
-            Console.Out.WriteLine("Url: " + e.Uri.AbsoluteUri);
             // if we are not navigating to the callback url then authentication is not complete.
             if (!e.Uri.AbsoluteUri.StartsWith(callbackURL)) return;
 
@@ -88,6 +87,7 @@ namespace FlickrApp
                 Dispatcher.BeginInvoke(() => MessageBox.Show("Authentication completed for user " + accessToken.FullName + ", with token " + accessToken.Token));
 
                 this.NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
+                //TODO: exit current page after opening the new page
             });
         }
     }

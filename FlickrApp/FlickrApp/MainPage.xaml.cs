@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using FlickrNet;
 using Microsoft.Phone.Controls;
 
 namespace FlickrApp
@@ -31,7 +32,8 @@ namespace FlickrApp
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+            String uri = FlickrManager.IsLoggedIn() ? "/SearchPage.xaml" : "/LoginPage.xaml";
+            this.NavigationService.Navigate(new Uri(uri, UriKind.Relative));
         }
     }
 }
