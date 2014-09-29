@@ -39,7 +39,7 @@ namespace FlickrApp
 
             // Standard Silverlight initialization
             InitializeComponent();
-
+            
             // Phone-specific initialization
             InitializePhoneApplication();
 

@@ -28,5 +28,10 @@ namespace FlickrApp
         {
             this.NavigationService.Navigate(new Uri("/About.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+        }
     }
 }
