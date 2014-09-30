@@ -19,8 +19,9 @@ namespace FlickrApp
             InitializeComponent();
         }
 
-        private void SearchButtonTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        private void SearchButtonTapped(object sender, EventArgs eventArgs)
         {
+            this.Focus();
             String searchTerm = SearchTextBox.Text;
             if (searchTerm.Length == 0)
             {

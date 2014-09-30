@@ -25,16 +25,17 @@
         <telerikPrimitives:RadTextBox x:Name="SearchTextBox"
                                       VerticalAlignment="Top"
                                       Watermark="Search"
-                                      Margin="0,0,66,0" />
-        <Image x:Name="SearchButton"
-               HorizontalAlignment="Left"
-               Margin="398,0,-9,0"
-               VerticalAlignment="Top"
-               Source="/Images/feature.search.png"
-               Stretch="UniformToFill"
-               Height="86"
-               Width="91"
-               Tap="SearchButtonTapped" />
+                                      ActionButtonVisibility="Visible"
+                                      ActionButtonTap="SearchButtonTapped"
+                                       >
+            <telerikPrimitives:RadTextBox.ActionButtonStyle>
+                <Style TargetType="telerikPrimitives:RadImageButton">
+                    <Setter Property="ButtonShape"
+                            Value="Ellipse" />
+                </Style>
+            </telerikPrimitives:RadTextBox.ActionButtonStyle>
+        </telerikPrimitives:RadTextBox>
+
         <ListBox  x:Name="ResultsListBox"
                   HorizontalAlignment="Left"
                   Height="662"

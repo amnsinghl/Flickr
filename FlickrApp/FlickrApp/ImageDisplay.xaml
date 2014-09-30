@@ -20,7 +20,8 @@
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar1/like.png"
                                             Text="Like" />
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar2/edit.png"
-                                            Text="Comment" />
+                                            Text="Comment"
+                                            Click="CommentButton_Clicked"/>
             <shell:ApplicationBarIconButton IconUri="/Images/share.png"
                                             Text="Share" />
         </shell:ApplicationBar>
