@@ -25,15 +25,14 @@ namespace FlickrApp
         /// <summary>
         /// Navigates to about page.
         /// </summary>
-        private void GoToAbout(object sender, GestureEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("/About.xaml", UriKind.RelativeOrAbsolute));
-        }
-
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-//            String uri = FlickrManager.IsLoggedIn() ? "/SearchPage.xaml" : "/LoginPage.xaml";
             this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+        }
+
+        private void ExploreButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/SearchPage.xaml", UriKind.Relative));
         }
     }
 }

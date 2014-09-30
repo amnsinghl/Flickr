@@ -21,6 +21,11 @@ namespace FlickrApp
             return f;
         }
 
+        public static Flickr GetInstance()
+        {
+            return new Flickr(ApiKey, SharedSecret);
+        }
+
         public static void Logout()
         {
             IsolatedStorageSettings.ApplicationSettings.Remove(OauthTokenString);

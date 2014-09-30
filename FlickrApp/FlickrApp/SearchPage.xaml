@@ -5,6 +5,8 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,26 +19,41 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="43*" />
+            <RowDefinition Height="341*" />
         </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0"
-                    Margin="12,17,0,28">
-            <TextBlock Text="Flickr"
-                       Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBlock Text="search"
-                       Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}" />
-        </StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
-              Grid.Row="1"
-              Margin="12,0,12,0">
-
-        </Grid>
+        <telerikPrimitives:RadTextBox x:Name="SearchTextBox"
+                                      VerticalAlignment="Top"
+                                      Watermark="Search"
+                                      Margin="0,0,66,0" />
+        <Image x:Name="SearchButton"
+               HorizontalAlignment="Left"
+               Margin="414,10,0,0"
+               VerticalAlignment="Top"
+               Source="/Images/search.png"
+               Stretch="Fill"
+               Height="56"
+               Width="56"
+               Tap="SearchButtonTapped" />
+        <ListBox  x:Name="ResultsListBox"
+                  HorizontalAlignment="Left"
+                  Height="662"
+                  Margin="10,10,0,0"
+                  Grid.Row="1"
+                  VerticalAlignment="Top"
+                  Width="460">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <toolkit:WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding SmallUrl}" 
+                          Height="150"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 
 </phone:PhoneApplicationPage>

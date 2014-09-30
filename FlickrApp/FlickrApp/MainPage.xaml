@@ -65,7 +65,8 @@
                     HorizontalAlignment="Left"
                     Margin="10,219,0,0"
                     VerticalAlignment="Top"
-                    Width="436" />
+                    Width="436"
+                    Click="ExploreButton_Click" />
             <Button x:Name="LoginButton"
                     Content="Login"
                     HorizontalAlignment="Left"
