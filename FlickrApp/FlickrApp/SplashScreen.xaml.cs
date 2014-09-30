@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using FlickrApp.FlickrApi;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 

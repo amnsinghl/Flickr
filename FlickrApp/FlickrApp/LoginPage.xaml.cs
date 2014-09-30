@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using FlickrApp.FlickrApi;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 

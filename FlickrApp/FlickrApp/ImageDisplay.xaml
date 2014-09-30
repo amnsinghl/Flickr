@@ -13,6 +13,18 @@
                             Orientation="Portrait"
                             mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.png"
+                                            Text="Favourites" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar1/like.png"
+                                            Text="Like" />
+            <shell:ApplicationBarIconButton IconUri="/Assets/AppBar2/edit.png"
+                                            Text="Comment" />
+            <shell:ApplicationBarIconButton IconUri="/Images/share.png"
+                                            Text="Share" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
@@ -24,6 +36,23 @@
                ZoomMode="Free"
                MaximumZoom="3"
                Width="470" />
+        <TextBlock x:Name="ImageTitle"
+                   HorizontalAlignment="Left"
+                   Margin="29,592,0,0"
+                   Text="Image Title"
+                   VerticalAlignment="Top"
+                   Style="{StaticResource PhoneTextNormalStyle}"
+                   FontSize="30"
+                   Width="441" />
+        <TextBlock x:Name="FavAndCommentCount"
+                   HorizontalAlignment="Left"
+                   Margin="29,637,0,0"
+                   TextWrapping="Wrap"
+                   Text="32 Favs, 21 Comments"
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Foreground="#FF00AEFF"
+                   Width="441" />
     </Grid>
 
 </phone:PhoneApplicationPage>

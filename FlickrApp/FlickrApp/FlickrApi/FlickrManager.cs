@@ -1,7 +1,7 @@
 ﻿using System.IO.IsolatedStorage;
 using FlickrNet;
 
-namespace FlickrApp
+namespace FlickrApp.FlickrApi
 {
     public class FlickrManager
     {

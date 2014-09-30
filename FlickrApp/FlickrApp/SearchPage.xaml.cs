@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using FlickrApp.FlickrApi;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -27,10 +28,17 @@ namespace FlickrApp
                 return;
             }
 
-            Flickr flickr = FlickrManager.GetInstance();
+            SystemTray.IsVisible = true;
+            SystemTray.ProgressIndicator = new ProgressIndicator();
+            SystemTray.ProgressIndicator.IsIndeterminate = true;
+            SystemTray.ProgressIndicator.IsVisible = true;
+//            Flickr flickr = FlickrManager.GetInstance();
+            Flickr flickr = FlickrManager.GetAuthInstance();
             var options = new PhotoSearchOptions();
            
             options.Tags = searchTerm;
+            options.SortOrder = PhotoSearchSortOrder.InterestingnessDescending;
+            options.Extras = PhotoSearchExtras.CountFaves | PhotoSearchExtras.CountComments;
             flickr.PhotosSearchAsync(options, r =>
             {
                 if (r.Error != null)
@@ -44,10 +52,13 @@ namespace FlickrApp
 
                 PhotoCollection photos = r.Result;
 
+
                 Dispatcher.BeginInvoke(() =>
                 {
                     ResultsListBox.ItemsSource = photos;
+                    SystemTray.ProgressIndicator.IsVisible = false;
                 });
+
 
                 ResultsListBox.SelectionChanged += (o, args) =>
                 {
@@ -57,7 +68,7 @@ namespace FlickrApp
                     }
 
                     Photo p = photos.ElementAt(ResultsListBox.SelectedIndex);
-                    MessageBox.Show(p.LargeUrl + "Yay bitch");
+//                    MessageBox.Show(p.LargeUrl);
                     PhoneApplicationService.Current.State["photo"] = p;
                     ResultsListBox.SelectedIndex = -1;
                     this.NavigationService.Navigate(new Uri("/ImageDisplay.xaml", UriKind.Relative));

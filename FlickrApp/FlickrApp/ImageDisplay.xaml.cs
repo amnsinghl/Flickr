@@ -26,7 +26,9 @@ namespace FlickrApp
             Uri uri = new Uri(p.LargeUrl, UriKind.Absolute);
             ImageSource imgSource = new BitmapImage(uri);
             MainImage.Source = imgSource;
-
+            
+            ImageTitle.Text = p.Title;
+            FavAndCommentCount.Text = p.CountFaves + " Faves, " + p.CountComments + " Comments";
         }
     }
 }

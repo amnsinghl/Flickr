@@ -28,12 +28,12 @@
                                       Margin="0,0,66,0" />
         <Image x:Name="SearchButton"
                HorizontalAlignment="Left"
-               Margin="414,10,0,0"
+               Margin="398,0,-9,0"
                VerticalAlignment="Top"
-               Source="/Images/search.png"
-               Stretch="Fill"
-               Height="56"
-               Width="56"
+               Source="/Images/feature.search.png"
+               Stretch="UniformToFill"
+               Height="86"
+               Width="91"
                Tap="SearchButtonTapped" />
         <ListBox  x:Name="ResultsListBox"
                   HorizontalAlignment="Left"
@@ -44,13 +44,13 @@
                   Width="460">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <toolkit:WrapPanel Orientation="Horizontal"/>
+                    <toolkit:WrapPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding SmallUrl}" 
-                          Height="150"/>
+                    <Image Source="{Binding SmallUrl}"
+                           Height="150" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
