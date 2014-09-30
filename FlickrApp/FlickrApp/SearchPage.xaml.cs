@@ -41,10 +41,27 @@ namespace FlickrApp
                     });
                     return;
                 }
+
+                PhotoCollection photos = r.Result;
+
                 Dispatcher.BeginInvoke(() =>
                 {
-                    ResultsListBox.ItemsSource = r.Result;
+                    ResultsListBox.ItemsSource = photos;
                 });
+
+                ResultsListBox.SelectionChanged += (o, args) =>
+                {
+                    if (ResultsListBox.SelectedIndex == -1)
+                    {
+                        return;
+                    }
+
+                    Photo p = photos.ElementAt(ResultsListBox.SelectedIndex);
+                    MessageBox.Show(p.LargeUrl + "Yay bitch");
+                    PhoneApplicationService.Current.State["photo"] = p;
+                    ResultsListBox.SelectedIndex = -1;
+                    this.NavigationService.Navigate(new Uri("/ImageDisplay.xaml", UriKind.Relative));
+                };
             });
         }
     }
