@@ -12,9 +12,9 @@ using Microsoft.Phone.Shell;
 
 namespace FlickrApp
 {
-    public partial class CommentPage : PhoneApplicationPage
+    public partial class FavouritesPage : PhoneApplicationPage
     {
-        public CommentPage()
+        public FavouritesPage()
         {
             InitializeComponent();
         }
@@ -34,18 +34,19 @@ namespace FlickrApp
                 IsIndeterminate = true,
                 IsVisible = true
             };
-            f.PhotosCommentsGetListAsync(photoid, r =>
+            f.PhotosGetFavoritesAsync(photoid,100000,1, r =>
             {
                 if (r.Result == null)
                 {
                     MessageBox.Show("Error Occured in fetching Comments");
                     return;
                 }
-
-                PhotoCommentCollection photoCommentCollection = r.Result;
+                PhotoFavoriteCollection photoFavoriteCollection = r.Result;
+                PhotoFavorite ff;
+                
                 Dispatcher.BeginInvoke(() =>
                 {
-                    CommentList.ItemsSource = photoCommentCollection;
+                    FavouritesList.ItemsSource = photoFavoriteCollection;
                     SystemTray.ProgressIndicator.IsVisible = false;
                 });
 

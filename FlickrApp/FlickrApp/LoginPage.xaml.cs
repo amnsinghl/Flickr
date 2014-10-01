@@ -80,10 +80,11 @@ namespace FlickrApp
                 }
 
                 OAuthAccessToken accessToken = r.Result;
-
                 // Save the oauth token for later use
                 FlickrManager.OAuthToken = accessToken.Token;
                 FlickrManager.OAuthTokenSecret = accessToken.TokenSecret;
+                FlickrManager.UserId = accessToken.UserId;
+                FlickrManager.UserName = accessToken.Username;
 
                 Dispatcher.BeginInvoke(() => MessageBox.Show("Authentication completed for user " + accessToken.FullName + ", with token " + accessToken.Token));
 

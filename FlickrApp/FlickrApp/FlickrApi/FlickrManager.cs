@@ -10,6 +10,8 @@ namespace FlickrApp.FlickrApi
 
         public const string OauthTokenString = "OAuthToken";
         public const string OauthSecretString = "OAuthTokenSecret";
+        public const string UserIdString = "UserId";
+        public const string UserNameString = "UserName";
 
         public static Flickr GetAuthInstance()
         {
@@ -35,6 +37,36 @@ namespace FlickrApp.FlickrApi
         public static bool IsLoggedIn()
         {
             return OAuthToken != null && OAuthTokenSecret != null;
+        }
+
+        public static string UserId
+        {
+            get
+            {
+                if (IsolatedStorageSettings.ApplicationSettings.Contains(UserIdString))
+                    return IsolatedStorageSettings.ApplicationSettings[UserIdString] as string;
+                else
+                    return null;
+            }
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings[UserIdString] = value;
+            }
+        }
+
+        public static string UserName
+        {
+            get
+            {
+                if (IsolatedStorageSettings.ApplicationSettings.Contains(UserNameString))
+                    return IsolatedStorageSettings.ApplicationSettings[UserNameString] as string;
+                else
+                    return null;
+            }
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings[UserNameString] = value;
+            }
         }
 
         public static string OAuthToken

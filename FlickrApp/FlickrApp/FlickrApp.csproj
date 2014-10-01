@@ -101,6 +101,12 @@
     <Compile Include="CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FavouritesPage.xaml.cs">
+      <DependentUpon>FavouritesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlickrApi\CustomPhotoFavourite.cs" />
+    <Compile Include="FlickrApi\CustomPhotoFavouriteCollection.cs" />
+    <Compile Include="FlickrApi\CustomUtilityMethods.cs" />
     <Compile Include="FlickrApi\FlickrManager.cs" />
     <Compile Include="ImageDisplay.xaml.cs">
       <DependentUpon>ImageDisplay.xaml</DependentUpon>
@@ -235,6 +241,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="CommentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FavouritesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

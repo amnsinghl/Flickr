@@ -16,9 +16,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.png"
-                                            Text="Favourites" />
+                                            Text="Favourites"
+                                            Click="FavouriteButton_Clicked"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar1/like.png"
-                                            Text="Like" />
+                                            Text="Like"
+                                            Click="LikeButton_Clicked"/>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar2/edit.png"
                                             Text="Comment"
                                             Click="CommentButton_Clicked"/>
