@@ -19,9 +19,11 @@ namespace FlickrApp
             InitializeComponent();
         }
 
+        string photoid = "";
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string photoid = "";
+            
 
             if (!NavigationContext.QueryString.TryGetValue("photoid", out photoid))
             {
@@ -50,6 +52,54 @@ namespace FlickrApp
                 });
 
 
+            });
+        }
+
+        private void ShowProgressIndicator()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                SystemTray.ProgressIndicator = new ProgressIndicator { IsIndeterminate = true, IsVisible = true };
+            });
+        }
+
+        private void HideProgressIndicator()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                SystemTray.ProgressIndicator.IsVisible = false;
+            });
+        }
+
+        private void PostButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            string comment = CommentTextBox.Text;
+            if (comment.Length == 0)
+            {
+                MessageBox.Show("Comment can not be empty");
+                return;
+            }
+            if (!FlickrManager.IsLoggedIn())
+            {
+                MessageBox.Show("You need to login before you can comment");
+                this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));
+                return;
+            }
+
+            ShowProgressIndicator();
+            Flickr flickr = FlickrManager.GetAuthInstance();
+            flickr.PhotosCommentsAddCommentAsync(photoid,comment, r =>
+            {
+                HideProgressIndicator();
+                if (r.Result == null)
+                {
+                    MessageBox.Show("Error occured in creating a comment");
+                }
+                else
+                {
+                    MessageBox.Show("Comment Added");
+                    CommentTextBox.Text = "";
+                }
             });
         }
     }

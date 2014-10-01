@@ -45,7 +45,7 @@ namespace FlickrApp
             this.NavigationService.Navigate(new Uri("/FavouritesPage.xaml?photoid=" + photoid, UriKind.Relative));
         }
 
-        private void showProgressIndicator()
+        private void ShowProgressIndicator()
         {
             Dispatcher.BeginInvoke(() =>
             {
@@ -53,7 +53,7 @@ namespace FlickrApp
             });
         }
 
-        private void hideProgressIndicator()
+        private void HideProgressIndicator()
         {
             Dispatcher.BeginInvoke(() =>
             {
@@ -70,7 +70,7 @@ namespace FlickrApp
                 return;
             }
 
-            showProgressIndicator();
+            ShowProgressIndicator();
             
             Flickr flickr = FlickrManager.GetAuthInstance();
             flickr.FavoritesGetContextAsync(photoid, FlickrManager.UserId, r =>
@@ -81,7 +81,7 @@ namespace FlickrApp
                     {
                         flickr.FavoritesAddAsync(photoid, result =>
                         {
-                            hideProgressIndicator();;
+                            HideProgressIndicator();;
                             if (result.HasError)
                             {
                                 MessageBox.Show("Error occured");
