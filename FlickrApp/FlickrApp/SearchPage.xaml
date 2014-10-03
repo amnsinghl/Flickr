@@ -42,7 +42,8 @@
                   Margin="10,10,0,0"
                   Grid.Row="1"
                   VerticalAlignment="Top"
-                  Width="460">
+                  Width="460"
+                  SelectionChanged="ResultsListBox_SelectionChanged">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <toolkit:WrapPanel Orientation="Horizontal" />

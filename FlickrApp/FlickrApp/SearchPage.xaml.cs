@@ -14,6 +14,8 @@ namespace FlickrApp
 {
     public partial class SearchPage : PhoneApplicationPage
     {
+        PhotoCollection photos;
+
         public SearchPage()
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace FlickrApp
             options.Tags = searchTerm;
             options.SortOrder = PhotoSearchSortOrder.InterestingnessDescending;
             options.Extras = PhotoSearchExtras.CountFaves | PhotoSearchExtras.CountComments;
+            
             flickr.PhotosSearchAsync(options, r =>
             {
                 if (r.Error != null)
@@ -51,7 +54,7 @@ namespace FlickrApp
                     return;
                 }
 
-                PhotoCollection photos = r.Result;
+                photos = r.Result;
 
 
                 Dispatcher.BeginInvoke(() =>
@@ -59,22 +62,20 @@ namespace FlickrApp
                     ResultsListBox.ItemsSource = photos;
                     SystemTray.ProgressIndicator.IsVisible = false;
                 });
-
-
-                ResultsListBox.SelectionChanged += (o, args) =>
-                {
-                    if (ResultsListBox.SelectedIndex == -1)
-                    {
-                        return;
-                    }
-
-                    Photo p = photos.ElementAt(ResultsListBox.SelectedIndex);
-//                    MessageBox.Show(p.LargeUrl);
-                    PhoneApplicationService.Current.State["photo"] = p;
-                    ResultsListBox.SelectedIndex = -1;
-                    this.NavigationService.Navigate(new Uri("/ImageDisplay.xaml", UriKind.Relative));
-                };
             });
+        }
+
+        private void ResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (photos == null || ResultsListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Photo p = photos.ElementAt(ResultsListBox.SelectedIndex);
+            PhoneApplicationService.Current.State["photo"] = p;
+            ResultsListBox.SelectedIndex = -1;
+            this.NavigationService.Navigate(new Uri("/ImageDisplay.xaml", UriKind.Relative));
         }
     }
 }
