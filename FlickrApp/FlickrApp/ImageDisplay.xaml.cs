@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.ServiceModel.Channels;
@@ -12,12 +13,15 @@ using FlickrApp.FlickrApi;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Xna.Framework.Media;
 
 namespace FlickrApp
 {
     public partial class ImageDisplay : PhoneApplicationPage
     {
         private string photoid;
+        private Uri photoUri;
+        private BitmapImage imgSource;
         public ImageDisplay()
         {
             InitializeComponent();
@@ -27,10 +31,9 @@ namespace FlickrApp
         {
             Photo p = (Photo)PhoneApplicationService.Current.State["photo"];
             photoid = p.PhotoId;
-            Uri uri = new Uri(p.LargeUrl, UriKind.Absolute);
-            ImageSource imgSource = new BitmapImage(uri);
+            photoUri = new Uri(p.LargeUrl, UriKind.Absolute);
+            imgSource = new BitmapImage(photoUri);
             MainImage.Source = imgSource;
-
             ImageTitle.Text = p.Title;
             FavAndCommentCount.Text = p.CountFaves + " Faves, " + p.CountComments + " Comments";
         }
@@ -116,6 +119,38 @@ namespace FlickrApp
                 }
 
             });
+        }
+
+        private bool SaveImageToPhotoHub(WriteableBitmap bmp)
+        {
+
+            using (var mediaLibrary = new MediaLibrary())
+            {
+                using (var stream = new MemoryStream())
+                {
+                    var fileName = string.Format("Gs{0}.jpg", Guid.NewGuid());
+                    bmp.SaveJpeg(stream, bmp.PixelWidth , bmp.PixelHeight , 0, 100);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    var picture = mediaLibrary.SavePicture(fileName, stream);
+                    if (picture.Name.Contains(fileName)) return true;
+                }
+            }
+            return false;
+        }
+
+        private void DownloadImage_Clicked(object sender, EventArgs e)
+        {
+            ShowProgressIndicator();
+            WriteableBitmap bmp = new WriteableBitmap(imgSource);
+            if (SaveImageToPhotoHub(bmp))
+            {
+                MessageBox.Show("Image Saved", "Information", MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBox.Show("Error : Image Not Saved", "Information", MessageBoxButton.OK);
+            }
+            HideProgressIndicator();
         }
     }
 }

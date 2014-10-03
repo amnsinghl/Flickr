@@ -15,6 +15,10 @@
                             shell:SystemTray.IsVisible="True">
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Download Image"
+                                              Click="DownloadImage_Clicked"/>
+            </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/favs.png"
                                             Text="Favourites"
                                             Click="FavouriteButton_Clicked"/>
