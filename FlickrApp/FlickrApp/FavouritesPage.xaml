@@ -22,12 +22,28 @@
                                 Width="480">
             <phone:LongListSelector.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-<!--                        <Image Source="{Binding AuthorBuddyIcon}"-->
-<!--                               Height="50"-->
-<!--                               Width="50" />-->
-                        <TextBlock Text="{Binding UserName}" />
-                    </StackPanel>
+                    <Grid x:Name="LayoutRoot">
+                        <Image HorizontalAlignment="Left"
+                               Height="75"
+                               Margin="10,10,0,0"
+                               VerticalAlignment="Top"
+                               Source="{Binding UserIcon}"
+                               Width="75" />
+                        <TextBlock HorizontalAlignment="Left"
+                                   Margin="90,10,0,0"
+                                   Text="{Binding UserName}"
+                                   VerticalAlignment="Top"
+                                   Style="{StaticResource JumpListAlphabetStyle}"
+                                   FontSize="22"
+                                   Width="265" />
+                        <TextBlock HorizontalAlignment="Left"
+                                   Margin="360,12,0,0"
+                                   TextWrapping="Wrap"
+                                   Text="{Binding Date}"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Top"
+                                   Width="110" />
+                    </Grid>
                 </DataTemplate>
             </phone:LongListSelector.ItemTemplate>
         </phone:LongListSelector>

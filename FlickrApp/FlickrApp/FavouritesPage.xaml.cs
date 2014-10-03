@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using FlickrApp.FlickrApi;
+using FlickrApp.ViewModels;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -28,25 +29,24 @@ namespace FlickrApp
                 MessageBox.Show("Error");
             }
 
-            Flickr f = FlickrManager.GetAuthInstance();
+            FlickrPhotoFavourite photoFavourite = new FlickrPhotoFavourite();;
             SystemTray.ProgressIndicator = new ProgressIndicator()
             {
                 IsIndeterminate = true,
                 IsVisible = true
             };
-            f.PhotosGetFavoritesAsync(photoid,100000,1, r =>
+            photoFavourite.fetch(photoid,100000, r =>
             {
                 if (r.Result == null)
                 {
                     MessageBox.Show("Error Occured in fetching Comments");
                     return;
                 }
-                PhotoFavoriteCollection photoFavoriteCollection = r.Result;
-                PhotoFavorite ff;
+                PhotoFavouriteCollection photoFavoriteCollection = r.Result;
                 
                 Dispatcher.BeginInvoke(() =>
                 {
-                    FavouritesList.ItemsSource = photoFavoriteCollection;
+                    FavouritesList.ItemsSource = FavouriteViewModel.PhotoFavouriteCollectionToObservableFavouriteViewModel(photoFavoriteCollection);
                     SystemTray.ProgressIndicator.IsVisible = false;
                 });
 

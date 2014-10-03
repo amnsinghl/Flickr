@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using FlickrApp.FlickrApi;
+using FlickrApp.ViewModels;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -47,7 +48,7 @@ namespace FlickrApp
                 PhotoCommentCollection photoCommentCollection = r.Result;
                 Dispatcher.BeginInvoke(() =>
                 {
-                    CommentList.ItemsSource = photoCommentCollection;
+                    CommentList.ItemsSource = CommentViewModel.PhotoCommentCollectionToObservableCommentViewModel(photoCommentCollection);
                     SystemTray.ProgressIndicator.IsVisible = false;
                 });
 
