@@ -13,7 +13,9 @@ using FlickrApp.FlickrApi;
 using FlickrNet;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
 
 namespace FlickrApp
 {
@@ -121,7 +123,7 @@ namespace FlickrApp
             });
         }
 
-        private bool SaveImageToPhotoHub(WriteableBitmap bmp)
+        private string SaveImageToPhotoHub(WriteableBitmap bmp)
         {
 
             using (var mediaLibrary = new MediaLibrary())
@@ -132,17 +134,18 @@ namespace FlickrApp
                     bmp.SaveJpeg(stream, bmp.PixelWidth , bmp.PixelHeight , 0, 100);
                     stream.Seek(0, SeekOrigin.Begin);
                     var picture = mediaLibrary.SavePicture(fileName, stream);
-                    if (picture.Name.Contains(fileName)) return true;
+                    if (picture.Name.Contains(fileName)) 
+                        return picture.GetPath();
                 }
             }
-            return false;
+            return null;
         }
 
         private void DownloadImage_Clicked(object sender, EventArgs e)
         {
             ShowProgressIndicator();
             WriteableBitmap bmp = new WriteableBitmap(imgSource);
-            if (SaveImageToPhotoHub(bmp))
+            if (SaveImageToPhotoHub(bmp) != null)
             {
                 MessageBox.Show("Image Saved", "Information", MessageBoxButton.OK);
             }
@@ -151,6 +154,22 @@ namespace FlickrApp
                 MessageBox.Show("Error : Image Not Saved", "Information", MessageBoxButton.OK);
             }
             HideProgressIndicator();
+        }
+
+        private void ShareImage_Clicked(object sender, EventArgs e)
+        {
+            WriteableBitmap bmp = new WriteableBitmap(imgSource);
+            String path = SaveImageToPhotoHub(bmp);
+            if (path != null)
+            {
+                var shareMediaTask = new ShareMediaTask();
+                shareMediaTask.FilePath = path;
+                shareMediaTask.Show();
+            }
+            else
+            {
+                MessageBox.Show("Error Can't share the image", "Information", MessageBoxButton.OK);
+            }
         }
     }
 }

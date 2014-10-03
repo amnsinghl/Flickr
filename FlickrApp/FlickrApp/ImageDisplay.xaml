@@ -29,7 +29,8 @@
                                             Text="Comment"
                                             Click="CommentButton_Clicked"/>
             <shell:ApplicationBarIconButton IconUri="/Images/share.png"
-                                            Text="Share" />
+                                            Text="Share"
+                                            Click="ShareImage_Clicked" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
