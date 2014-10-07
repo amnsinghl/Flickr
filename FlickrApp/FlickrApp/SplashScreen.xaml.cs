@@ -21,7 +21,7 @@ namespace FlickrApp
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            String uri = FlickrManager.IsLoggedIn() ? "/SearchPage.xaml" : "/MainPage.xaml";
+            String uri = FlickrManager.IsLoggedIn() ? "/HomePage.xaml" : "/MainPage.xaml";
             Thread.Sleep(3000);
             this.NavigationService.Navigate(new Uri(uri, UriKind.Relative));
         }

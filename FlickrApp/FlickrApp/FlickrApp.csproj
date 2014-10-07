@@ -109,8 +109,14 @@
     <Compile Include="FlickrApi\UtilityMethods.cs" />
     <Compile Include="FlickrApi\FlickrManager.cs" />
     <Compile Include="FlickrApi\FlickrPhotoFavourite.cs" />
+    <Compile Include="HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageDisplay.xaml.cs">
       <DependentUpon>ImageDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageUpload.xaml.cs">
+      <DependentUpon>ImageUpload.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="LoginPage.xaml.cs">
@@ -146,6 +152,8 @@
     <Content Include="Assets\AppBar1\like.png" />
     <Content Include="Assets\AppBar2\edit.png" />
     <Content Include="Assets\AppBar\favs.png" />
+    <Content Include="Assets\AppBar\feature.camera.png" />
+    <Content Include="Assets\AppBar\upload.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -190,6 +198,7 @@
     <Reference Include="FlickrNetWP7">
       <HintPath>..\packages\FlickrNet.WP7.3.14.0\lib\sl3-wp\FlickrNetWP7.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
@@ -251,7 +260,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImageDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageUpload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
