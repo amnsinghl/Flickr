@@ -14,6 +14,9 @@
     shell:SystemTray.IsVisible="True">
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="log out" Click="LogoutMenuItemClicked"/>
+            </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.camera.png"
                                             Text="upload"
                                             Click="CameraButtonClicked" />

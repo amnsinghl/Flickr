@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Navigation;
 using FlickrApp.FlickrApi;
 using FlickrNet;
 using Microsoft.Phone.Controls;
@@ -89,6 +90,7 @@ namespace FlickrApp
                 Dispatcher.BeginInvoke(() => MessageBox.Show("Authentication completed for user " + accessToken.FullName + ", with token " + accessToken.Token));
 
                 this.NavigationService.Navigate(new Uri("/HomePage.xaml", UriKind.Relative));
+                AppManager.ClearBackStack(this.NavigationService);
                 //TODO: exit current page after opening the new page
             });
         }

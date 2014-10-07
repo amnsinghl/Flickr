@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FlickrNet;
 using Microsoft.Phone.Controls;
@@ -22,9 +23,11 @@ namespace FlickrApp
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Navigates to about page.
-        /// </summary>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AppManager.ClearBackStack(this.NavigationService);
+        }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/LoginPage.xaml", UriKind.Relative));

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using FlickrApp.FlickrApi;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
@@ -40,6 +41,11 @@ namespace FlickrApp
                     ApplicationBar.IsVisible = false;
                     break;
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AppManager.ClearBackStack(this.NavigationService);
         }
 
         private void CameraButtonClicked(object sender, EventArgs e)
@@ -76,14 +82,11 @@ namespace FlickrApp
 
         private void CameraCapture()
         {
-            CameraCaptureTask cameraCaptureTask = new CameraCaptureTask();
+            var cameraCaptureTask = new CameraCaptureTask();
             cameraCaptureTask.Completed += (sender, result) =>
             {
                 if (result.TaskResult == TaskResult.OK)
                 {
-//                    ShareMediaTask shareMediaTask = new ShareMediaTask();
-//                    shareMediaTask.FilePath = result.OriginalFileName;
-//                    shareMediaTask.Show();
                     PhoneApplicationService.Current.State["upload_photo"] = result.ChosenPhoto;
                     this.NavigationService.Navigate(new Uri("/ImageUpload.xaml", UriKind.Relative));
                 }
@@ -93,20 +96,23 @@ namespace FlickrApp
 
         private void GalleryCapture()
         {
-            PhotoChooserTask photoChooserTask = new PhotoChooserTask();
+            var photoChooserTask = new PhotoChooserTask();
             photoChooserTask.Completed += (sender, result) =>
             {
                 if (result.TaskResult == TaskResult.OK)
                 {
-//                    ShareMediaTask shareMediaTask = new ShareMediaTask();
-//                    shareMediaTask.FilePath = result.OriginalFileName;
-//                    shareMediaTask.Show();
                     PhoneApplicationService.Current.State["upload_photo"] = result.ChosenPhoto; 
                     this.NavigationService.Navigate(new Uri("/ImageUpload.xaml", UriKind.Relative));
                 }
             };
 
             photoChooserTask.Show();
+        }
+
+        private void LogoutMenuItemClicked(object sender, EventArgs e)
+        {
+            FlickrManager.Logout();
+            this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
     }
 }
